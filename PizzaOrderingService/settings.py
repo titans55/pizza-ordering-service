@@ -83,10 +83,10 @@ WSGI_APPLICATION = 'PizzaOrderingService.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'pizzaOrderingServiceDB',
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'HOST': 'db',
+        'PORT': 5432,
     }
 }
 
