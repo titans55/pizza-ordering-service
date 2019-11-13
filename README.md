@@ -20,7 +20,7 @@ Go to [http://localhost:8000/api/v1/](http://localhost:8000/api/v1/) for to see 
 
   1. Order pizzas
      - Specify the desired flavors of pizza, the number of pizzas and their size.
-		ii. An order contains the information regarding the customer.
+     - An order contains the information regarding the customer.
      - Track the status of delivery.
      - Order the same flavor of pizza but with different sizes multiple times
   2. Update an order
