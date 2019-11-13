@@ -42,7 +42,7 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.Order
-        fields =["url", "is_paid", "ordered_pizzas", "delivery_detail"]
+        fields =["url",  "customer_id", "is_paid", "ordered_pizzas", "delivery_detail"]
 
     def create(self, validated_data):
         ordered_pizzas = validated_data.pop('ordered_pizzas')

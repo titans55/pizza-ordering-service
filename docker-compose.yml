@@ -4,16 +4,23 @@ services:
     image: postgres
     environment:
       POSTGRES_USER: postgres
+
   migration:
     build: .
-    image: app
     command: python manage.py migrate
     volumes:
       - .:/code
-    links:
-      - db
     depends_on:
       - db
+      
+  running_tests:
+    build: .
+    command: python manage.py test
+    volumes:
+      - .:/code
+    depends_on:
+      - migration
+
   app:
     build:
       context: .
@@ -21,4 +28,4 @@ services:
       - "8000:8000"
     command: python manage.py runserver 0.0.0.0:8000
     depends_on:
-      - migration
+      - running_tests
