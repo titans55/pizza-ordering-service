@@ -41,7 +41,11 @@ class OrderedPizza(models.Model):
 
     #  Relationships
     pizza_flavor = models.ForeignKey("api.PizzaFlavor", on_delete=models.CASCADE)
-
+    order = models.ForeignKey(
+        'api.Order',
+        on_delete=models.CASCADE,
+        related_name="ordered_pizzas", 
+    )
     class Meta:
         pass
 
@@ -65,7 +69,6 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True, editable=False)
 
     #  Relationships
-    ordered_pizzas = models.ManyToManyField("api.OrderedPizza")
     delivery_detail = models.OneToOneField("api.DeliveryDetail", on_delete=models.CASCADE)
 
     class Meta:

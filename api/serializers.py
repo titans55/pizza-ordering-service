@@ -25,7 +25,7 @@ class OrderedPizzaSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.OrderedPizza
-        fields = ["url", "pizza_flavor", "count", "size"]
+        fields = ["url", "order", "pizza_flavor", "count", "size"]
         read_only_fields = ('pizza_flavor',)
 
 
@@ -37,12 +37,11 @@ class DeliveryDetailSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
-    ordered_pizzas = OrderedPizzaSerializer(many=True, required=False)
     delivery_detail = DeliveryDetailSerializer(required=False)
 
     class Meta:
         model = models.Order
-        fields =["url",  "customer_id", "is_paid", "ordered_pizzas", "delivery_detail"]
+        fields =["url",  "customer_id", "is_paid", "delivery_detail"]
 
     def create(self, validated_data):
         ordered_pizzas = validated_data.pop('ordered_pizzas')
@@ -53,6 +52,7 @@ class OrderSerializer(serializers.HyperlinkedModelSerializer):
         for ordered_pizza_details in ordered_pizzas:
             ordered_pizza_details = dict(ordered_pizza_details)
             ordered_pizza = models.OrderedPizza.objects.create(
+                order_id=order.id,
                     **ordered_pizza_details
                 )
             order.ordered_pizzas.add(
