@@ -1,5 +1,5 @@
 # Pizza ordering service
-Pizza ordering rest api using django rest framework
+Pizza ordering restful api using django rest framework
 
 ### Prerequisites
 
